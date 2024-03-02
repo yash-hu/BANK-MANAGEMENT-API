@@ -20,6 +20,7 @@ namespace BANK_MANAGEMENT_API.Models
         public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<Interest> Interests { get; set; } = null!;
         public virtual DbSet<Transaction> Transactions { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -127,6 +128,27 @@ namespace BANK_MANAGEMENT_API.Models
                     .HasColumnName("account_type");
 
                 entity.Property(e => e.InterestRate).HasColumnName("interest_rate");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Username)
+                    .HasName("PK__USERS__7C9273C556ABB34F");
+
+                entity.ToTable("USERS");
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(100)
+                    .HasColumnName("user_name")
+                    .UseCollation("Latin1_General_CS_AS");
+
+                entity.Property(e => e.PasswordHash)
+                    .HasMaxLength(64)
+                    .HasColumnName("password_hash");
+
+                entity.Property(e => e.PasswordSalt)
+                    .HasMaxLength(8000)
+                    .HasColumnName("password_salt");
             });
 
             modelBuilder.Entity<Transaction>(entity =>

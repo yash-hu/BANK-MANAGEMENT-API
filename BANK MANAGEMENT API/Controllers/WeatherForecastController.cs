@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BANK_MANAGEMENT_API.Controllers
@@ -18,6 +19,7 @@ namespace BANK_MANAGEMENT_API.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles ="User")]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {

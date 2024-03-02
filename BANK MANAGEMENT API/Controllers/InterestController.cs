@@ -1,11 +1,14 @@
 ﻿using BANK_MANAGEMENT_API.Managers;
 using BANK_MANAGEMENT_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace BANK_MANAGEMENT_API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin,User")]
     [ApiController]
     public class InterestController : ControllerBase
     {
